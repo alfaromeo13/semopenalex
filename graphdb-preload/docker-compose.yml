@@ -1,0 +1,29 @@
+#  to load triples inside GraphDB
+services:
+  graphdb:
+    container_name: graphdb-preload
+    image: ontotext/graphdb:11.1.3
+    mem_limit: 110g
+    mem_reservation: 110g
+
+    entrypoint: [ "/opt/graphdb/dist/bin/importrdf",
+                  "preload", 
+                  "--default-bits", "32",
+                  "--chunk", "20m", "--force",
+                  "--recursive", "--parsing-tasks", "24",
+                  "--recovery-point-interval", "3600",
+                  "--id", "metaphactory",
+                  "/opt/graphdb/graphdb-import/" ]
+
+    environment:
+      GDB_JAVA_OPTS: >-
+        -Xms90g
+        -Xmx90g
+        -Dgraphdb.home=/opt/graphdb/home
+        -Dgraphdb.license.file=/etc/graphdb-license
+        -Dgraphdb.workbench.importDirectory=/opt/graphdb/graphdb-import
+
+    volumes:
+      - /data/graphdb-home:/opt/graphdb/home:Z
+      - /data/graphdb-import:/opt/graphdb/graphdb-import:Z
+      - /home/jovan/SemOpenAlex/semopenalex/graphdb-preload/graphdb-license/graphdb.license:/etc/graphdb-license:Z
