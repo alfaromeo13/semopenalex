@@ -21,35 +21,29 @@ python3 ./transformation-scripts/semopenalex-works.py;
 python3 ./transformation-scripts/semopenalex-dataset.py;
 
 # make sure to clean graphdb storage folder before ingesting data
-rm -rf ./graphdb-preload/graphdb-home/data/repositories/metaphactory/storage
+rm -rf /data/graphdb-home/data/repositories/metaphactory/storage
 
+# clean up intermediate txt files
+find /data/graphdb-import-semopenalex -type f -name "*.txt" -delete
 
-'''TODO: 
-
-Now, first remove all generated txt files from graphdb-import-semopenalex folder (and subfolders!)
-
-Then, run: docker-compose up -d to create graphdb instance
-
-Insert valid graphdb license through workbench GUI and create 2 repositories:
-(* make sure to select 32 default bits checkbox)
-1. semopenalex
-2. yago 
-
-run docker-compose down to stop and remove graphdb instance
+'''
+Now, follow the steps below to load data into graphdb: 
 =================================================================================================
-Then load all RDF data dump .gzip files to graphdb using preload tool
+load semopenalex data inside graphdb
 docker-compose -f ./graphdb-preload/openalex-docker-compose.yml up -d
 
 To see logs:
 docker logs -f graphdb-preload
 =================================================================================================
-Finally, load yago inside graphdb
+Then, load yago data inside graphdb
 docker-compose -f ./graphdb-preload/yago-docker-compose.yml up -d
 
 To see logs:
 docker logs -f graphdb-preload-yago
 =================================================================================================
-finally, run docker-compose up -d and wait for graphdb to start adn index all loaded data
+Finally, run: docker-compose up -d  
 
-Done.
+Insert valid enterprise graphdb license through workbench GUI
+
+Wait until all loaded data is indexed (this will take a while) and that repositories say "READY" status
 '''
