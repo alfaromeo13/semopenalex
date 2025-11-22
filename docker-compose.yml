@@ -14,8 +14,6 @@ services:
         -Xms32g
         -Xmx64g
         -Dgraphdb.home=/opt/graphdb/home
-        -Dgraphdb.license.file=/etc/graphdb-license
-
+      
     volumes:
       - /data/graphdb-home:/opt/graphdb/home:Z
-      - /home/jovan/SemOpenAlex/semopenalex/graphdb-preload/graphdb-license/graphdb.license:/etc/graphdb-license:Z

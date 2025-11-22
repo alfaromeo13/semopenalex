@@ -1,4 +1,5 @@
-#  to load triples inside GraphDB
+#  load SemOpenAlex triples inside GraphDB
+
 services:
   graphdb:
     container_name: graphdb-preload
@@ -8,11 +9,10 @@ services:
 
     entrypoint: [ "/opt/graphdb/dist/bin/importrdf",
                   "preload", 
-                  "--default-bits", "32",
                   "--chunk", "20m", "--force",
                   "--recursive", "--parsing-tasks", "24",
                   "--recovery-point-interval", "3600",
-                  "--id", "metaphactory",
+                  "--id", "semopenalex",
                   "/opt/graphdb/graphdb-import/" ]
 
     environment:
@@ -20,10 +20,9 @@ services:
         -Xms90g
         -Xmx90g
         -Dgraphdb.home=/opt/graphdb/home
-        -Dgraphdb.license.file=/etc/graphdb-license
         -Dgraphdb.workbench.importDirectory=/opt/graphdb/graphdb-import
+        -Dgraphdb.defaultBits=32
 
     volumes:
       - /data/graphdb-home:/opt/graphdb/home:Z
-      - /data/graphdb-import:/opt/graphdb/graphdb-import:Z
-      - /home/jovan/SemOpenAlex/semopenalex/graphdb-preload/graphdb-license/graphdb.license:/etc/graphdb-license:Z
+      - /data/graphdb-import-semopenalex:/opt/graphdb/graphdb-import:Z

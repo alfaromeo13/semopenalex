@@ -1,0 +1,34 @@
+services:
+  graphdb:
+    container_name: graphdb-preload-yago
+    image: ontotext/graphdb:11.1.3
+
+    mem_limit: 110g
+    mem_reservation: 110g
+
+    entrypoint:
+      - /opt/graphdb/dist/bin/importrdf
+      - preload
+      - --chunk
+      - "20m"
+      - --force
+      - --recursive
+      - --parsing-tasks
+      - "24"
+      - --recovery-point-interval
+      - "3600"
+      - --id
+      - yago
+      - /opt/graphdb/graphdb-import/yago
+
+    environment:
+      GDB_JAVA_OPTS: >-
+        -Xms90g
+        -Xmx90g
+        -Dgraphdb.home=/opt/graphdb/home
+        -Dgraphdb.workbench.importDirectory=/opt/graphdb/graphdb-import
+        -Dgraphdb.defaultBits=32
+
+    volumes:
+      - /data/graphdb-home:/opt/graphdb/home:Z
+      - /data/graphdb-import-yago/yago:/opt/graphdb/graphdb-import/yago:Z
