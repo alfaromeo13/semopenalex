@@ -31,6 +31,7 @@ Now, first remove all generated txt files from graphdb-import-semopenalex folder
 Then, run: docker-compose up -d to create graphdb instance
 
 Insert valid graphdb license through workbench GUI and create 2 repositories:
+(* make sure to select 32 default bits checkbox)
 1. semopenalex
 2. yago 
 
