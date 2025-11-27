@@ -1,4 +1,5 @@
 # this is compose script to start GraphDB
+version: '3.8'
 
 services:  
   graphdb:
@@ -11,8 +12,8 @@ services:
 
     environment:
       GDB_JAVA_OPTS: >-
-        -Xms32g
-        -Xmx64g
+        -Xms32g 
+        -Xmx96g
         -Dgraphdb.home=/opt/graphdb/home
       
     volumes:
