@@ -295,15 +295,15 @@ os.makedirs(trig_output_dir_path, exist_ok=True)
 
 print("Output directory:", trig_output_dir_path, flush=True)
 
-data_dump_start_time = time.ctime()
-print('works entity files started to download at: ' + data_dump_start_time, flush=True)
-# Copy works entity snapshot
-client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
-print("Starting S3 listing...", flush=True)
-file_names, folders = get_file_folders(client, "openalex", "data/works/")
-print(f"Found {len(file_names)} files in S3 for works.", flush=True)
-download_files(client, "openalex", data_dump_input_root_dir, file_names, folders)
-print('works entity files finished to download.')
+# data_dump_start_time = time.ctime()
+# print('works entity files started to download at: ' + data_dump_start_time, flush=True)
+# # Copy works entity snapshot
+# client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
+# print("Starting S3 listing...", flush=True)
+# file_names, folders = get_file_folders(client, "openalex", "data/works/")
+# print(f"Found {len(file_names)} files in S3 for works.", flush=True)
+# download_files(client, "openalex", data_dump_input_root_dir, file_names, folders)
+# print('works entity files finished to download.')
 
 start_time = time.ctime()
 today = date.today()

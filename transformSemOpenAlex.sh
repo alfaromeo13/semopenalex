@@ -21,7 +21,7 @@ python3 ./transformation-scripts/semopenalex-works.py;
 python3 ./transformation-scripts/semopenalex-dataset.py;
 
 # make sure to clean graphdb storage folder before ingesting data
-rm -rf /data/graphdb-home/data/repositories/metaphactory/storage
+# rm -rf /data/graphdb-home/data/repositories/metaphactory/storage
 
 # clean up intermediate txt files
 find /data/graphdb-import -type f -name "*.txt" -delete

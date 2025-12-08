@@ -174,23 +174,23 @@ data_dump_input_entity_dir = f'{data_dump_input_root_dir}/data/{ENTITY_TYPE}/*'
 trig_output_dir_path = f'/data/graphdb-import/{ENTITY_TYPE}'
 trig_output_file_path = f'{trig_output_dir_path}/{ENTITY_TYPE}-semopenalex-{today}.trig'
 
-data_dump_start_time = time.ctime()
-print('authors entity files started to download at: '+ data_dump_start_time)
-# Copy authors entity snapshot
-client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
-file_names, folders = get_file_folders(client, "openalex", "data/authors/")
-download_files(client, "openalex", data_dump_input_root_dir, file_names, folders)
-print('authors entity files finished to download.')
+# data_dump_start_time = time.ctime()
+# print('authors entity files started to download at: '+ data_dump_start_time)
+# # Copy authors entity snapshot
+# client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
+# file_names, folders = get_file_folders(client, "openalex", "data/authors/")
+# download_files(client, "openalex", data_dump_input_root_dir, file_names, folders)
+# print('authors entity files finished to download.')
 
 start_time = time.ctime()
 print(f"Overall authors entity start -- {start_time}.")
 
 
 # collect all .gz parts of works data dump to iterate over with multiple workers (see no. of CPU THREADS above)
-gz_file_list = []
-for filename in glob.glob(os.path.join(data_dump_input_entity_dir, '*.gz')):
-    gz_file_list.append(filename)
-
+gz_file_list = glob.glob(
+    f"{data_dump_input_root_dir}/data/{ENTITY_TYPE}/**/*.gz",
+    recursive=True
+)
 
 def transform_gz_file(gz_file_path):
 
