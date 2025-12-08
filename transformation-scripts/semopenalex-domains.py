@@ -174,13 +174,13 @@ data_dump_input_root_dir = '/data/openalex-snapshot'
 trig_output_dir_path = '/data/graphdb-import/'
 trig_output_file_path = f'{trig_output_dir_path}{ENTITY_TYPE}-semopenalex-{today}.trig'
 
-data_dump_start_time = time.ctime()
-print('domains entity files started to download at: '+ data_dump_start_time)
-# Copy domains entity snapshot
-client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
-file_names, folders = get_file_folders(client, "openalex", "data/domains/")
-download_files(client, "openalex", data_dump_input_root_dir, file_names, folders)
-print('domains entity files finished to download.')
+# data_dump_start_time = time.ctime()
+# print('domains entity files started to download at: '+ data_dump_start_time)
+# # Copy domains entity snapshot
+# client = boto3.client("s3", config=Config(signature_version=UNSIGNED))
+# file_names, folders = get_file_folders(client, "openalex", "data/domains/")
+# download_files(client, "openalex", data_dump_input_root_dir, file_names, folders)
+# print('domains entity files finished to download.')
 
 start_time = time.ctime()
 print('domains entity started to transform at: '+ start_time)

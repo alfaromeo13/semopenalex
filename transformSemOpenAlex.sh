@@ -24,26 +24,18 @@ python3 ./transformation-scripts/semopenalex-dataset.py;
 rm -rf /data/graphdb-home/data/repositories/metaphactory/storage
 
 # clean up intermediate txt files
-find /data/graphdb-import-semopenalex -type f -name "*.txt" -delete
+find /data/graphdb-import -type f -name "*.txt" -delete
 
-'''
-Now, follow the steps below to load data into graphdb: 
-=================================================================================================
-load semopenalex data inside graphdb
-docker-compose -f ./graphdb-preload/openalex-docker-compose.yml up -d
-
-To see logs:
-docker logs -f graphdb-preload
-=================================================================================================
-Then, load yago data inside graphdb
-docker-compose -f ./graphdb-preload/yago-docker-compose.yml up -d
-
-To see logs:
-docker logs -f graphdb-preload-yago
-=================================================================================================
-Finally, run: docker-compose up -d  
-
-Insert valid enterprise graphdb license through workbench GUI
-
-Wait until all loaded data is indexed (this will take a while) and that repositories say "READY" status
-'''
+# To preload semopenalex data into graphdb:
+# docker-compose -f ./graphdb-preload/semopenalex-docker-compose.yml up -d
+# docker logs -f graphdb-preload
+#
+# Then preload yago data:
+# docker-compose -f ./graphdb-preload/yago-docker-compose.yml up -d
+# docker logs -f graphdb-preload-yago
+#
+# Finally start everything:
+# docker-compose up -d
+#
+# Insert enterprise graphdb license through the workbench GUI.
+# Wait until all repositories show "READY" status. 

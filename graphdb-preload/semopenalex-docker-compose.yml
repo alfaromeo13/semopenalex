@@ -24,4 +24,4 @@ services:
 
     volumes:
       - /data/graphdb-home:/opt/graphdb/home:Z
-      - /data/graphdb-import-semopenalex:/opt/graphdb/graphdb-import:Z
+      - /data/graphdb-import:/opt/graphdb/graphdb-import:Z
